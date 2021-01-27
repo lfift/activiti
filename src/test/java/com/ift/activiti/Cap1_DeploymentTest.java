@@ -17,7 +17,7 @@ import java.util.zip.ZipInputStream;
  * @date 2021/1/26
  */
 @SpringBootTest
-public class DeploymentTest {
+public class Cap1_DeploymentTest {
 
     @Autowired
     private RepositoryService repositoryService;
@@ -25,9 +25,9 @@ public class DeploymentTest {
 
     @Test
     public void initDeploymentBPMN() {
-        String filePath = "bpmn/QingJia_Deployment.bpmn";
+        String filePath = "bpmn/Part4_Task_claim.bpmn";
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource(filePath).name("请假流程审批").key("请假流程审批").deploy();
+                .addClasspathResource(filePath).name("请假流程审批测试拾取_Part4").deploy();
         System.out.println(deployment.getName());
     }
 
