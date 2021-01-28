@@ -25,9 +25,9 @@ public class Cap1_DeploymentTest {
 
     @Test
     public void initDeploymentBPMN() {
-        String filePath = "bpmn/Part4_Task_claim.bpmn";
+        String filePath = "bpmn/Part6_UEL_V3.bpmn";
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource(filePath).name("请假流程审批测试拾取_Part4").deploy();
+                .addClasspathResource(filePath).name("Part6_UEL_V3").deploy();
         System.out.println(deployment.getName());
     }
 

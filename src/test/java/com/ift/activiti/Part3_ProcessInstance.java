@@ -19,7 +19,7 @@ public class Part3_ProcessInstance {
     @Test
     public void startProcessInstance() {
         ProcessInstance processInstance =
-                runtimeService.startProcessInstanceByKey("myProcess_claim", "123123");
+                runtimeService.startProcessInstanceByKey("myProcess_uelv3", "123");
         System.out.println("InstanceId: " + processInstance.getProcessInstanceId());
     }
 

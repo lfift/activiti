@@ -37,7 +37,7 @@ public class Part4_Task {
      */
     @Test
     public void getTaskByAssignee() {
-        List<Task> tasks = taskService.createTaskQuery().taskAssignee("bajie").list();
+        List<Task> tasks = taskService.createTaskQuery().taskAssignee("wukong").list();
         for (Task task : tasks) {
             System.out.println("Id: " + task.getId());
             System.out.println("Name: " + task.getName());
@@ -61,7 +61,7 @@ public class Part4_Task {
      */
     @Test
     public void claimTask() {
-        taskService.claim("67ad0079-60aa-11eb-b1fa-005056c00008", "wukong");
+        taskService.claim("bb0f52ae-617a-11eb-b1fa-005056c00008", "wukong");
     }
 
     /**
