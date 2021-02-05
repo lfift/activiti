@@ -1,29 +1,5 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.3.10:3306/activiti?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    hikari:
-      # 最小空闲连接数量
-      minimum-idle: 5
-      # 空闲连接存活最大时间，默认600000（10分钟）
-      idle-timeout: 180000
-      # 连接池最大连接数，默认是10
-      maximum-pool-size: 10
-      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
-      auto-commit: true
-      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
-      max-lifetime: 1800000
-      # 数据库连接超时时间,默认30秒，即30000
-      connection-timeout: 30000
-      connection-test-query: select 1
-  activiti:
-    #是否启用历史表
-    db-history-used: true
-    #历史等级，full表示记录所有历史信息
-    history-level: full
-    #自动部署
-    check-process-definitions: false
   application:
     name: activiti
+  profiles:
+    active: dev
