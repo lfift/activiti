@@ -1,6 +1,7 @@
 package com.ift.activiti;
 
 import com.ift.activiti.security.SecurityUtil;
+import org.activiti.api.model.shared.model.VariableInstance;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.builders.ProcessPayloadBuilder;
 import org.activiti.api.process.runtime.ProcessRuntime;
@@ -9,6 +10,7 @@ import org.activiti.api.runtime.shared.query.Pageable;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class Part8_ProcessRuntime {
     @Autowired
     private SecurityUtil securityUtil;
 
+    /**
+     * 查询流程实例
+     */
     @Test
     public void listProcessInstance() {
         securityUtil.logInAs("bajie");
@@ -43,6 +48,9 @@ public class Part8_ProcessRuntime {
         }
     }
 
+    /**
+     * 发起流程
+     */
     @Test
     public void startProcess() {
         securityUtil.logInAs("bajie");
@@ -57,4 +65,55 @@ public class Part8_ProcessRuntime {
         System.out.println("StartDate: " + processInstance.getStartDate());
         System.out.println("processDefinitionKey: " + processInstance.getProcessDefinitionKey());
     }
+
+    /**
+     * 挂起流程
+     */
+    @Test
+    public void suspendProcess() {
+        String processInstanceId = "b60ca75c-6796-11eb-a7fa-00e04c3625e7";
+        securityUtil.logInAs("bajie");
+        processRuntime.suspend(ProcessPayloadBuilder.suspend(processInstanceId));
+    }
+
+    /**
+     * 激活流程实例
+     */
+    @Test
+    public void resumeProcessInstance() {
+        String processInstanceId = "b60ca75c-6796-11eb-a7fa-00e04c3625e7";
+        securityUtil.logInAs("bajie");
+        processRuntime.resume(ProcessPayloadBuilder.resume(processInstanceId));
+    }
+
+    /**
+     * 删除流程实例
+     */
+    @Test
+    @Transactional
+    public void deleteProcessInstance() {
+        String processInstanceId = "e80a64f7-6797-11eb-b112-00e04c3625e7";
+        securityUtil.logInAs("bajie");
+        processRuntime.delete(ProcessPayloadBuilder.delete()
+                .withProcessInstanceId(processInstanceId).withReason("123").build());
+    }
+
+    /**
+     * 获取流程变量
+     */
+    @Test
+    public void getProcessVariable() {
+        String processInstanceId = "e80a64f7-6797-11eb-b112-00e04c3625e7";
+        securityUtil.logInAs("bajie");
+        List<VariableInstance> variables = processRuntime.variables(ProcessPayloadBuilder.variables().withProcessInstanceId(processInstanceId).build());
+        for (VariableInstance variable : variables) {
+            System.out.println("name: " + variable.getName());
+            System.out.println("value: " + variable.getValue());
+            System.out.println("type: " + variable.getType());
+            System.out.println("processInstanceId: " + variable.getProcessInstanceId());
+            System.out.println("taskId: " + variable.getTaskId());
+        }
+    }
+
+
 }
