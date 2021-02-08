@@ -3,7 +3,6 @@ package com.ift.activiti.security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,12 +18,12 @@ import java.util.stream.Collectors;
  * @author liufei
  * @date 2021/2/5 17:37
  */
-@Configuration
+//@Configuration
 public class DemoApplicationConfiguration {
 
     private Logger logger = LoggerFactory.getLogger(DemoApplicationConfiguration.class);
 
-    @Bean
+//    @Bean
     public UserDetailsService myUserDetailsService() {
 
         InMemoryUserDetailsManager inMemoryUserDetailsManager = new InMemoryUserDetailsManager();
